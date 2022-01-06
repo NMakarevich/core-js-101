@@ -577,7 +577,15 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-  return arr[indexes];
+  indexes.reverse();
+  let result;
+  function recursive(array, idxs) {
+    if (idxs.length > 0) {
+      recursive(array[idxs.pop()], idxs);
+    } else result = array;
+  }
+  recursive(arr, indexes);
+  return result;
 }
 
 
